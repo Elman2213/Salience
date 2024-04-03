@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Resultados Finales
+{% endblock %}
+
+{% block content %}
+    {{ if participant.combined_payoff == participant.pago_estimado }}
+        Su pago total fue {{ participant.combined_payoff }} + 1000,00 COP
+    {{else}}
+        Su pago total fue {{ participant.combined_payoff }}
+    {{endif}}
+
+    {% next_button %}
+{% endblock %}
+
+

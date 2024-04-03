@@ -1,0 +1,35 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Inicio
+{% endblock %}
+
+{% block content %}
+    <input type="hidden" name="is_mobile" id="is_mobile">
+    {{ if player.tratamiento == 'T1' }} Tendras información permanente sobre tu desempeño en cuanto al pago por palabra, asi como las ganancias que vas acumulando <br/>
+    {{ endif }}
+    {{ if player.tratamiento == 'T2' }} En cualquier momento podrás solicitar información sobre tu desempeño y tus ganancias.
+    Necesitas oprimir el botón de solicitud de información que aparece en tu ventana de trabajo.
+    {{ endif }}
+    Tendrás dos rondas de práctica, después de estas rondas de práctica iniciara el juego.
+    {% next_button %}
+<script>
+    function isMobile() {
+        const toMatch = [
+            /Android/i,
+            /iPhone/i,
+            /iPad/i,
+        ];
+
+        return toMatch.some((toMatchItem) => {
+            return navigator.userAgent.match(toMatchItem);
+        });
+    }
+
+    document.getElementById('is_mobile').value = isMobile() ? 1 : 0;
+
+</script>
+{% endblock %}
+
+

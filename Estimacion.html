@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Pago Estimado
+{% endblock %}
+
+{% block content %}
+<body onload="DefPagoEstimado()">
+    <script>
+        function DefPagoEstimado() {
+            document.getElementById("pago_estimado").value = 0;
+         }
+    </script>
+    Intente por favor hacer una estimación de su pago total. Debe tener en cuenta que el pago total se compone del pago por su participación ($10.000 COP) más el pago de su desempeño($50 COP por palabra) por las palabras que logro transcribir.<br/ >
+    <FONT COLOR="red"> <strong><em> Escriba el número, sin puntos, comas, signos, solo números, NO LETRAS.<br/> Si acierta exactamente ganara $1000 pesos colombianos (COP) adicionales. </em></strong> </FONT><br/>
+    Cuanto cree que gano {{ formfield player.pago_estimado }}
+
+    {{formfield_errors 'pago_estimado'}}
+
+    {% next_button %}
+{% endblock %}
+
+

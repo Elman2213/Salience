@@ -1,0 +1,59 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Transcribir
+    {{ if subsession.is_practice_round }}
+        Ronda de Práctica {{ subsession.round_number }} de {{ Constants.num_practice_rounds }}
+    {{ endif}}
+{% endblock %}
+
+{% block content %}
+<body onload="DefNumSolInfo()" onkeydown="keyCode(event)"  ondragstart="return false" onselectstart="return false" oncontextmenu="return false">
+    <input type="hidden" name="numsolinfo" id="numsolinfo" />
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+    <script>
+        function DefNumSolInfo() {
+            document.getElementById("numsolinfo").value = 0;
+         }
+    </script>
+
+    {{ if player.tratamiento == 'T1' }} <FONT COLOR="red"> <strong><em>Tu pago por palabra es  {{ Constants.payment_correct_answer }} <br/>
+    Tus ganancias hasta el momento son {{ participant.combined_payoff }}</em></strong> </FONT><br/>
+    <script>
+        $('.otree-timer').show();
+    </script>
+    {{ endif }}
+
+
+    Introduce cada una de las palabras que ves en el texto, tal como aparecen:<br/>
+    <br/>
+        <b>{{ texto }} </b>
+        {% formfield player.palabras  %}
+
+    {{ if player.tratamiento == 'T2' }}
+    <button type="button" onclick="buttonClicked()">Quiero Información</button>
+
+
+    <script>
+        let numsolInfo = 0;
+        function buttonClicked() {
+            $('.otree-timer').show();
+            numsolInfo++;
+            document.getElementById("numsolinfo").value = numsolInfo;
+            window.alert("Tu pago por palabra es  {{ Constants.payment_correct_answer }} \nTus ganancias hasta el momento son {{ participant.combined_payoff|json }}" );
+
+        }
+    </script>
+
+    {{ endif }}
+
+    {{formfield_errors 'numsolinfo'}}
+
+    {% next_button %}
+
+{% endblock %}

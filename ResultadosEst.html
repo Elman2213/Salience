@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Resultados Estimación
+{% endblock %}
+
+{% block content %}
+    {{ if participant.combined_payoff == participant.pago_estimado }}
+        Felicitaciones has acertado tu estimación, se te abonaran $1000 pesos colombianos (COP) adicionales.
+    {{ else }}
+        No acertaste, tal vez en otra oportunidad.
+    {{ endif }}
+
+    {% next_button %}
+{% endblock %}
+
+
